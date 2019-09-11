@@ -1,11 +1,12 @@
+#import libraries
 import pandas as pd
-import numpy as np
 import re
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
+# define rankings by teams
 dif_sta = {'TAM':6, 'GNB':21, 'NOR':26, 'KAN':31, 'BAL':18, 'WAS':15, 'NYJ':4, 'CIN':16, 'LAC':13, 'NWE':32, 'LAR':22,
            'MIN':29, 'IND':12, 'SEA':28, 'MIA':7, 'DEN':20, 'CAR':27, 'DAL':23, 'CHI':7, 'NYG':5, 'JAX':3, 'HOU':19,
            'OAK':9, 'PIT':30, 'ARI':17, 'ATL':24, 'BUF':10, 'CLE':1, 'PHI':25, 'DET':14, 'TEN':11, 'SFO':2}
@@ -25,10 +26,11 @@ pass_off_19 = {'TAM':18, 'GNB':18, 'NOR':12, 'KAN':3, 'BAL':1, 'WAS':3, 'NYJ':18
 dif_run_def_18 = {'TAM':9, 'GNB':11, 'NOR':31, 'KAN':6, 'BAL':29, 'WAS':16, 'NYJ':7, 'CIN':4, 'LAC':24, 'NWE':22, 'LAR':10,
            'MIN':18, 'IND':25, 'SEA':20, 'MIA':2, 'DEN':12, 'CAR':21, 'DAL':28, 'CHI':32, 'NYG':13, 'JAX':14, 'HOU':30,
            'OAK':3, 'PIT':27, 'ARI':1, 'ATL':8, 'BUF':17, 'CLE':5, 'PHI':26, 'DET':23, 'TEN':15, 'SFO':19}
-
+#function that changes the ranking from 1 to 32
 def change_rank(x):
     return (-1*(x-32))+1
 
+#funcion that cleans the stats of qb and drop columns that ruins the model
 def clean_stats_qb(run_stats, dic_def, dic_off):
     run_stats = run_stats.rename({'Unnamed: 7': 'Where'}, axis=1)
     run_stats = run_stats[(run_stats['Pos'] == 'QB') & (run_stats['Att'] >= 10)]
@@ -73,6 +75,7 @@ def clean_stats_qb(run_stats, dic_def, dic_off):
     run_stats6 = run_stats5.drop(['Result', 'Points_Opp'], axis=1)
     return run_stats6
 
+#function that joins stats from 2018 and 2019 weeks 1 - 4
 def clean_stats_qb19_w4(df1, w1):
     w1['Month_October'] = [0 for x in range(len(w1))]
     w1['Month_November'] = [0 for x in range(len(w1))]
@@ -82,6 +85,7 @@ def clean_stats_qb19_w4(df1, w1):
     run = pd.concat([df1, w1], sort=False)
     return run
 
+#funcion that cleans the stats of rb and drop columns that ruins the model
 def clean_stats_rb(run_stats, dic_def):
     run_stats = run_stats[(run_stats['Yds'] >= 10) & (run_stats['Att'] >= 3)]
     run_stats = run_stats.rename({'Unnamed: 7': 'Where'}, axis=1) 
@@ -124,6 +128,7 @@ def clean_stats_rb(run_stats, dic_def):
     run_stats6 = run_stats5.drop(['Result', 'Points_Opp'], axis=1)
     return run_stats6
 
+#funcion that cleans the stats of wr and drop columns that ruins the model
 def clean_stats_wr(run_stats, dic_def):
     run_stats = run_stats.rename({'Unnamed: 7': 'Where'}, axis=1)
     run_stats = run_stats[run_stats.Tgt >= 3]
@@ -302,7 +307,11 @@ new_pred = ['Kyler Murray', 'ARI', 1, 'BAL', 'September', 'Sun', 1, 'QB']
 david_pred = ['David Johnson', 'ARI', 1, 'BAL', 'September', 'Sun', 1, 'RB']
 larry_fit = ['Larry Fitzgerald', 'ARI', 1, 'BAL', 'September', 'Sun', 1, 'WR']
 
-balw2 = [lj, latm, mb]
-ariw2 = [new_pred, david_pred, larry_fit]
+away = [lj, latm, mb]
+home = [new_pred, david_pred, larry_fit]
 
-print(final_df(ariw2, balw2))
+df_result = final_df(home, away)
+
+print(df_result)
+
+
