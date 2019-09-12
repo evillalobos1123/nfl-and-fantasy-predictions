@@ -298,14 +298,16 @@ def final_df(team1, team2):
     df_f = df2.set_index('Team')
     return df_f
 
-#Changable
-lj = ['Lamar Jackson', 'BAL', 0, 'ARI', 'September', 'Sun', 1, 'QB']
-latm = ['Latavius Murray', 'BAL', 0, 'ARI', 'September', 'Sun', 1, 'RB']
-mb = ['Marquise Brown', 'BAL', 0, 'ARI', 'September', 'Sun', 1, 'WR']
 
-new_pred = ['Kyler Murray', 'ARI', 1, 'BAL', 'September', 'Sun', 1, 'QB']
-david_pred = ['David Johnson', 'ARI', 1, 'BAL', 'September', 'Sun', 1, 'RB']
-larry_fit = ['Larry Fitzgerald', 'ARI', 1, 'BAL', 'September', 'Sun', 1, 'WR']
+
+#Changable
+lj = ['Jameis Winston', 'TAM', 1, 'CAR', 'September', 'Thu', 1, 'QB']
+latm = ['Peyton Barber', 'TAM', 1, 'CAR', 'September', 'Thu', 1, 'RB']
+mb = ['Mike Evans', 'TAM', 1, 'CAR', 'September', 'Thu', 1, 'WR']
+
+new_pred = ['Cam Newton', 'CAR', 0, 'TAM', 'September', 'Thu', 1, 'QB']
+david_pred = ['Christian McCaffrey', 'CAR', 0, 'TAM', 'September', 'Thu', 1, 'RB']
+larry_fit = ['D.J. Moore', 'CAR', 0, 'TAM', 'September', 'Thu', 1, 'WR']
 
 away = [lj, latm, mb]
 home = [new_pred, david_pred, larry_fit]
