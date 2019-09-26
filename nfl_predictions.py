@@ -253,36 +253,36 @@ def prediction_points(passw1_mod, brees):
 
 def all_predictions(info):
     if info[-1] == 'QB':
-        pass1 = pd.read_excel('../data/pass/sportsref_pass1_18.xls')
+        pass1 = pd.read_excel('data/pass/sportsref_pass1_18.xls')
         for x in range(1,12):
-            c = pd.read_excel(f'../data/pass/sportsref_downloadp({x}).xls', skiprows=1)
+            c = pd.read_excel(f'data/pass/sportsref_downloadp({x}).xls', skiprows=1)
             pass1 = pd.concat([pass1, c], ignore_index = True, sort=False)
         pass_stats1 = clean_stats_qb(pass1, dif_pass_def, pass_off_18)
-        w1_pass = clean_stats_qb(pd.read_excel(f'../data/pass/sportsref_download19_{info[-2]}(1).xls', skiprows=1), 
+        w1_pass = clean_stats_qb(pd.read_excel(f'data/pass/sportsref_download19_{info[-2]}(1).xls', skiprows=1), 
                          dif_pass_def, pass_off_19)
         pass_19 = clean_stats_qb19_w4(pass_stats1, w1_pass)
         for_pred = pass_for_pred(info, pass_19)
         kyler_w2 = prediction_points(pass_19, for_pred)
         return kyler_w2
     elif info[-1] == 'RB':
-        run1 = pd.read_excel('../data/run/sportsref_rus1_18.xls')
+        run1 = pd.read_excel('data/run/sportsref_rus1_18.xls')
         for x in range(1,12):
-            b = pd.read_excel(f'../data/run/sportsref_download ({x}).xls', skiprows=1)
+            b = pd.read_excel(f'data/run/sportsref_download ({x}).xls', skiprows=1)
             run1 = pd.concat([run1, b], ignore_index=True, sort=False)
         run_stats1 = clean_stats_rb(run1, dif_run_def_18)
-        w1_run = clean_stats_rb(pd.read_excel(f'../data/run/sportsref_download19_{info[-2]}(1).xls', skiprows=1), 
+        w1_run = clean_stats_rb(pd.read_excel(f'data/run/sportsref_download19_{info[-2]}(1).xls', skiprows=1), 
                          dif_run_def_18)
         run_19 = clean_stats_qb19_w4(run_stats1, w1_run)
         for_pred_rb = run_for_pred(info, run_19)
         david_w2 = prediction_points(run_19, for_pred_rb)
         return david_w2
     elif info[-1] == 'WR':
-        rec1 = pd.read_excel('../data/rec/sportsref_rec1_18.xls')
+        rec1 = pd.read_excel('data/rec/sportsref_rec1_18.xls')
         for x in range(1,23):
-            a = pd.read_excel(f'../data/rec/sportsref_download ({x}).xls', skiprows=1)
+            a = pd.read_excel(f'data/rec/sportsref_download ({x}).xls', skiprows=1)
             rec1 = pd.concat([rec1, a], ignore_index=True, sort=False)
         rec_stats1 = clean_stats_wr(rec1, dif_pass_def)
-        w1_rec = clean_stats_wr(pd.read_excel(f'../data/rec/sportsref_download19_{info[-2]}(1).xls', skiprows=1), 
+        w1_rec = clean_stats_wr(pd.read_excel(f'data/rec/sportsref_download19_{info[-2]}(1).xls', skiprows=1), 
                          dif_pass_def)
         rec_19 = clean_stats_qb19_w4(rec_stats1, w1_rec)
         for_pred_wr = rec_for_pred(info, rec_19)
